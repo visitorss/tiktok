@@ -14,6 +14,8 @@ let successItem = document.querySelector(".success-item");
 let okBtn = document.querySelector(".ok-btn");
 let counter = 0;
 let paraghrap = document.querySelector(".p-item");
+let largeText = document.querySelector(".large");
+let amountCoin = document.querySelector(".amountcoin");
 
 okBtn.addEventListener("click", () => {
   success.classList.add("hidden");
@@ -25,6 +27,13 @@ rechargeBtn.addEventListener("click", () => {
   } else {
     success.classList.remove("hidden");
     paraghrap.innerHTML = `The coin worth $ ${totalResult.innerHTML} has been recharged to given username account `;
+    setTimeout(() => {
+      customInput.value = "";
+      largeText.innerHTML = "Large amount supported";
+      customTitle.classList.remove("hidden");
+      customInput.classList.add("hidden");
+      totalResult.innerHTML = "0.00";
+    }, 300);
   }
 });
 
@@ -40,6 +49,8 @@ itemOne.addEventListener("click", () => {
   totalResult.innerHTML = aCent.innerHTML;
   customTitle.classList.remove("hidden");
   customInput.classList.add("hidden");
+  largeText.innerHTML = "Large amount supported";
+  customInput.value = "";
 });
 
 itemTwo.addEventListener("click", () => {
@@ -54,6 +65,8 @@ itemTwo.addEventListener("click", () => {
   totalResult.innerHTML = bCent.innerHTML;
   customTitle.classList.remove("hidden");
   customInput.classList.add("hidden");
+  largeText.innerHTML = "Large amount supported";
+  customInput.value = "";
 });
 
 itemThree.addEventListener("click", () => {
@@ -68,6 +81,8 @@ itemThree.addEventListener("click", () => {
   totalResult.innerHTML = cCent.innerHTML;
   customTitle.classList.remove("hidden");
   customInput.classList.add("hidden");
+  largeText.innerHTML = "Large amount supported";
+  customInput.value = "";
 });
 
 itemFour.addEventListener("click", () => {
@@ -82,6 +97,8 @@ itemFour.addEventListener("click", () => {
   totalResult.innerHTML = dCent.innerHTML;
   customTitle.classList.remove("hidden");
   customInput.classList.add("hidden");
+  largeText.innerHTML = "Large amount supported";
+  customInput.value = "";
 });
 
 itemFive.addEventListener("click", () => {
@@ -96,6 +113,8 @@ itemFive.addEventListener("click", () => {
   totalResult.innerHTML = eCent.innerHTML;
   customTitle.classList.remove("hidden");
   customInput.classList.add("hidden");
+  largeText.innerHTML = "Large amount supported";
+  customInput.value = "";
 });
 
 itemSix.addEventListener("click", () => {
@@ -110,6 +129,8 @@ itemSix.addEventListener("click", () => {
   totalResult.innerHTML = fCent.innerHTML;
   customTitle.classList.remove("hidden");
   customInput.classList.add("hidden");
+  largeText.innerHTML = "Large amount supported";
+  customInput.value = "";
 });
 
 itemSeven.addEventListener("click", () => {
@@ -124,6 +145,8 @@ itemSeven.addEventListener("click", () => {
   totalResult.innerHTML = jCent.innerHTML;
   customTitle.classList.remove("hidden");
   customInput.classList.add("hidden");
+  largeText.innerHTML = "Large amount supported";
+  customInput.value = "";
 });
 
 itemCustom.addEventListener("click", () => {
@@ -137,6 +160,8 @@ itemCustom.addEventListener("click", () => {
   itemFive.classList.remove("active-border");
   itemSix.classList.remove("active-border");
   itemSeven.classList.remove("active-border");
+  largeText.innerHTML = "30-2,500,000";
+  totalResult.innerHTML = "0.00";
 });
 
 let totalStorage = 0;
@@ -152,11 +177,28 @@ let totalResult = document.querySelector(".rersult-total");
 
 customInput.addEventListener("keyup", () => {
   aAndB();
+  if (customInput.value < 30 && customInput.value > 0) {
+    amountCoin.classList.remove("hidden");
+    largeText.classList.add("hidden");
+    itemCustom.classList.add("errorshadow");
+    console.log("shecdomaa");
+  } else if (customInput.value === "") {
+    amountCoin.classList.add("hidden");
+    itemCustom.classList.remove("errorshadow");
+    largeText.classList.remove("hidden");
+    largeText.innerHTML = "30-2,500,000";
+  } else {
+    itemCustom.classList.remove("errorshadow");
+    amountCoin.classList.add("hidden");
+    largeText.classList.remove("hidden");
+    console.log("sworia");
+    largeText.innerHTML = `${"$ "}${counter}`;
+  }
 });
 
 function aAndB() {
   let inputNumber = customInput.value;
-  let a = 0.0085714285714286;
+  let a = 0.0105714285714286;
   let b = a * inputNumber;
   counter = parseFloat(b).toFixed(2);
   totalResult.innerHTML = counter;
